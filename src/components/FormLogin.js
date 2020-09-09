@@ -1,31 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Form, Col, Button } from "react-bootstrap";
+import { Form, Col, Button, Modal } from "react-bootstrap";
 
-const Formlogin = ({ handleClose }) => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
+const FormLogin = ({ handleClose }) => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-
-  const handleInputChange = (e) => {
-    // const { name, value } = e.target;
-    // setData({ ...data, [name]: value });
-    setData[e.target.name] = e.target.value;
-  };
-
-  // const handleEmail = (e) => {
-  //   setEmail((e.target.name = e.target.value));
-  //   console.log(email);
-  // };
-
-  // const handlePassword = (e) => {
-  //   setPassword((e.target.name = e.target.value));
-  //   console.log(password);
-  // };
 
   const submitHandler = (e) => {
     axios
@@ -69,17 +50,17 @@ const Formlogin = ({ handleClose }) => {
             />
           </Form.Group>
         </Form.Row>
-        <Form.Row>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer>
+          <Button className="buttonClose" variant="dark" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" type="submit">
-            Login
+          <Button className="buttonSubmit" variant="primary" type="submit">
+            Sign Up
           </Button>
-        </Form.Row>
+        </Modal.Footer>
       </Form>
     </div>
   );
 };
 
-export default Formlogin;
+export default FormLogin;

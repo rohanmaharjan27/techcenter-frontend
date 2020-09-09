@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import "../css/style.css";
 import { Nav, Navbar, Modal } from "react-bootstrap";
 import ModalLogin from "./ModalLogin";
 import ModalRegister from "./ModalRegister";
@@ -6,7 +7,7 @@ import ModalRegister from "./ModalRegister";
 function NavbarMain() {
   return (
     <div>
-      <div>9860304670</div>
+      <a href="tel:+977-9860304670">9860304670</a>
       <Navbar collapseOnSelect expand="lg" bg="light">
         <Navbar.Brand href="#home">TechCenter</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
