@@ -5,12 +5,23 @@ import Index from "./components/Index";
 import ModalRegister from "./components/ModalRegister";
 import ModalLogin from "./components/ModalLogin";
 import ProductsMain from "./components/ProductsMain";
+import NavbarMain from "./components/NavbarMain";
+import Switch from "react-bootstrap/esm/Switch";
+import { Route } from "react-router-dom";
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   return (
     <div className="App">
-      {/* <Index /> */}
-      <ProductsMain />
+      <NavbarMain />
+      <Switch>
+        <Route exact path="/products" component={ProductsMain} />
+        <Route exact path="/about" component={AboutUs} />
+        <Route exact path="/contact" component={ContactUs} />
+        <Route exact path="/" component={Index} />
+      </Switch>
+      {/* <ProductsMain /> */}
     </div>
   );
 }

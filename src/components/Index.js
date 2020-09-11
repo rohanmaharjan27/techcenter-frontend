@@ -1,6 +1,7 @@
 import React from "react";
 import NavbarMain from "./NavbarMain";
 import CarouselMain from "./CarouselMain";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const title = () => {
@@ -8,9 +9,8 @@ const Index = () => {
   };
   return (
     <div>
-      <NavbarMain />
+      <h2>TechCenter Home</h2>
       <CarouselMain />
-      <h4>TechCenter</h4>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const CardProduct = (product) => {
   const { data } = product;
@@ -12,7 +13,9 @@ const CardProduct = (product) => {
           src={`http://localhost:8000/images/${data.productImageName}`}
         />
         <Card.Body>
-          <Card.Title>{data.productName}</Card.Title>
+          <Link to={`/products/${data._id}`}>
+            <Card.Title>{data.productName}</Card.Title>
+          </Link>
           <Card.Text>{data.productDescription}</Card.Text>
         </Card.Body>
       </Card>
