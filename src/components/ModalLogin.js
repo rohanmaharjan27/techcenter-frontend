@@ -23,7 +23,7 @@ function ModalLogin() {
           <Modal.Title>Sign In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Formlogin handleClose={handleClose} /> {/*Login Code*/}
+          <Formlogin handleClose={handleClose} setShow={setShow} />
         </Modal.Body>
       </Modal>
     </div>

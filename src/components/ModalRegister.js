@@ -24,7 +24,7 @@ function ModalRegister() {
           <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormRegister handleClose={handleClose} />
+          <FormRegister handleClose={handleClose} setShow={setShow} />
         </Modal.Body>
       </Modal>
     </div>

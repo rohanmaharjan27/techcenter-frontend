@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const CardProduct = (product) => {
+  //product => sab props pass gareko
   const { data } = product;
 
   return (

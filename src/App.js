@@ -10,6 +10,7 @@ import Switch from "react-bootstrap/esm/Switch";
 import { Route } from "react-router-dom";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
         <Route exact path="/about" component={AboutUs} />
         <Route exact path="/contact" component={ContactUs} />
         <Route exact path="/" component={Index} />
+        <Route exact path="/products/:id" component={ProductDetails} />
       </Switch>
-      {/* <ProductsMain /> */}
     </div>
   );
 }

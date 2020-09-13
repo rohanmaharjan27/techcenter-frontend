@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, Col, Button, Modal } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
-const FormLogin = ({ handleClose }) => {
+const FormLogin = ({ handleClose, setShow }) => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
+  const history = useHistory();
+
   const submitHandler = (e) => {
     axios
       .post("http://localhost:8000/users/login", data)
       .then((response) => {
+        if (response.data.token != null) {
+          alert(response.data.message_success);
+          setShow(false);
+          history.push("/products");
+        } else {
+          alert(response.data.message_error);
+        }
         console.log(response);
       })
       .catch((error) => {
@@ -55,7 +65,7 @@ const FormLogin = ({ handleClose }) => {
             Close
           </Button>
           <Button className="buttonSubmit" variant="primary" type="submit">
-            Sign Up
+            Sign In
           </Button>
         </Modal.Footer>
       </Form>

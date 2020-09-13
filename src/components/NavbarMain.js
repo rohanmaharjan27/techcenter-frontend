@@ -13,16 +13,16 @@ import ProductsMain from "./ProductsMain";
 function NavbarMain() {
   return (
     <div>
-      <a className="tel" href="tel:+977-9860304670">
-        9860304670
-      </a>
       <Navbar collapseOnSelect expand="lg" bg="light">
-        <Navbar.Brand>
-          <Link to="/">Home</Link>
-        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+          <a className="tel" href="tel:+977-9860304670">
+            9860304670
+          </a>
           <Nav className="mr-auto">
+            <Nav.Link>
+              <Link to="/">Home</Link>
+            </Nav.Link>
             <Nav.Link>
               <Link to="/products">Products</Link>
             </Nav.Link>

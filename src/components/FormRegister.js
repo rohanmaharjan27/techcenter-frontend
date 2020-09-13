@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "../css/style.css";
 import axios from "axios";
 import { Form, Col, Button, Modal } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
-const FormRegister = ({ handleClose }) => {
+const FormRegister = ({ handleClose, setShow }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -13,14 +14,22 @@ const FormRegister = ({ handleClose }) => {
     password: "",
     useType: "user",
   });
+  const history = useHistory();
 
   const submitHandler = (e) => {
     axios
       .post("http://localhost:8000/users/register", data)
       .then((response) => {
-        console.log(response);
+        if (response.data.message_success === "Register Successful") {
+          alert(response.data.message_success);
+          setShow(false);
+          history.push("/");
+        } else {
+          alert(response.data.message_error);
+        }
       })
       .catch((error) => {
+        alert(error.message);
         console.log(error);
       });
     e.preventDefault();
