@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Form, Col, Button, Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../App";
 
 const FormLogin = ({ handleClose, setShow }) => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  const user = useContext(UserContext);
+
+  console.log({ user });
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const history = useHistory();
 
@@ -16,8 +23,22 @@ const FormLogin = ({ handleClose, setShow }) => {
       .post("http://localhost:8000/users/login", data)
       .then((response) => {
         if (response.data.token != null) {
+          setIsLoggedIn(true);
+
+          localStorage.setItem("userId", JSON.stringify(response.data.id));
+          localStorage.setItem(
+            "userEmail",
+            JSON.stringify(response.data.email)
+          );
+          localStorage.setItem(
+            "userFirstName",
+            JSON.stringify(response.data.firstName)
+          );
+
           alert(response.data.message_success);
+
           setShow(false);
+          user.setName({ value: response.data.firstName });
           history.push("/products");
         } else {
           alert(response.data.message_error);
@@ -30,6 +51,10 @@ const FormLogin = ({ handleClose, setShow }) => {
     e.preventDefault();
     console.log(data);
   };
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <div>

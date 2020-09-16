@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CardProduct from "./CardProduct";
-import { Col, Form } from "react-bootstrap";
+import { CardColumns, Col, Form } from "react-bootstrap";
+import Cart from "./Cart";
 
 const ProductsMain = () => {
   const [products, setProducts] = useState([]);
@@ -29,20 +30,22 @@ const ProductsMain = () => {
   }, [search, products]);
 
   return (
-    <div>
+    <div className="productsMain">
       <Col sm="5">
+        <h1>Products</h1>
         <Form.Control
-          className="mr-sm-2"
           type="text"
           placeholder="Search products"
           onChange={(e) => setSearch(e.target.value)}
         />
       </Col>
       {console.log(search)}
-      {filteredProducts.length > 0 &&
-        filteredProducts.map((product) => (
-          <CardProduct key={product._id} data={product} />
-        ))}
+      <CardColumns className="cardColumns">
+        {filteredProducts.length > 0 &&
+          filteredProducts.map((product) => (
+            <CardProduct key={product._id} data={product} />
+          ))}
+      </CardColumns>
     </div>
   );
 };

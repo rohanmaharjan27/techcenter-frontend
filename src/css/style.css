@@ -3,6 +3,37 @@
   height: 400px;
   margin: auto;
 }
-.tel {
-  text-align: left;
+.productsMain {
+  text-align: center;
+}
+.cardColumns {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 25%;
+  padding-left: 2%;
+}
+.cardImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  height: 200px;
+}
+.center {
+  text-align: center;
+}
+.productDetailsImage {
+  border: black solid 1px;
+  margin: 5%;
+  width: 250px;
+  height: 350px;
+}
+.productDetails {
+  text-align: justify;
+  float: right;
+  margin: 5%;
+}
+.quantityInput {
+  width: 7%;
+  text-align: center;
 }
