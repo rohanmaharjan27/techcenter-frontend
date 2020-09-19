@@ -5,15 +5,69 @@ import { Button, Jumbotron } from "react-bootstrap";
 import { UserContext } from "../App";
 
 const ProductDetails = ({ match }) => {
-  const userFirstName = JSON.parse(localStorage.getItem("userFirstName"));
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const userDetails = JSON.parse(localStorage.getItem("userData"));
+  let userEmail = userDetails.email;
+  const id = match.params.id;
+
+  const [wishlistData, setWishlistData] = useState({
+    email: userEmail,
+    id: id,
+  });
+  //Route ko /products/:id
 
   const [product, setProduct] = useState({});
-  const [quanity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
+  const [productTotal, setProductTotal] = useState();
 
-  const [cart, setCart] = useState([]);
+  const sendToCart = (_id, name, price, image, quantity, productTotal) => {
+    let currentCart = [];
+    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
 
-  const id = match.params.id; //Route ko /products/:id
+    if (cartItems) currentCart = cartItems;
+
+    const prodObj = {
+      _id,
+      name,
+      price,
+      image,
+      quantity,
+      productTotal,
+    };
+
+    currentCart.push(prodObj);
+
+    let finalCart = currentCart.filter(
+      (
+        product,
+        index,
+        self //product = each product object,
+      ) => index === self.findIndex((t) => t._id === product._id)
+
+      // currentCart=[{_id:"1"},{_id:"2"}, {_id: "1"}]
+    );
+
+    const words = ["a", "b", "c"];
+
+    // const filteredWords = words.filter(word => word === "a"); ==> ["a"]
+
+    localStorage.setItem("cartItems", JSON.stringify(finalCart));
+
+    alert("Product Added to Cart");
+    alert("Product Already In Cart");
+  };
+
+  const addToWishlist = () => {
+    axios
+      .post("http://localhost:8000/wishlists/", wishlistData)
+      .then((response) => {
+        alert(response.data.message_successs);
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error);
+      });
+    console.log(wishlistData);
+  };
 
   useEffect(() => {
     axios
@@ -21,32 +75,34 @@ const ProductDetails = ({ match }) => {
       .then((res) => {
         console.log(res);
         setProduct(res.data);
+        setProductTotal(Number(res.data.productPrice));
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [id]);
 
   const QuantityAdd = () => {
-    if (quanity === 10) {
+    if (quantity === 10) {
       alert("Max quantity reached");
     } else {
-      setQuantity(quanity + 1);
+      setQuantity(quantity + 1);
     }
   };
 
   const QuantitySubtract = () => {
-    if (quanity === 1) {
+    if (quantity === 1) {
       alert("Minimum quantity reached");
     } else {
-      setQuantity(quanity - 1);
+      setQuantity(quantity - 1);
     }
   };
 
-  const AddToCart = (product) => {
-    console.log("we are in add to cart");
-    setCart([...cart, product]);
-  };
+  useEffect(() => {
+    let total = Number(product.productPrice) * quantity;
+    setProductTotal(total);
+  }, [product.productPrice, quantity]);
+
   return (
     <div>
       <img
@@ -55,8 +111,8 @@ const ProductDetails = ({ match }) => {
         alt="Product"
       />
       <div className="productDetails">
-        <h1>{userFirstName}</h1>
         <h1>Product Details</h1>
+        <p>Name - {product._id}</p>
         <p>Name - {product.productName}</p>
         <p>Price - ${product.productPrice}</p>
         <p>Category - {product.productCategory}</p>
@@ -71,21 +127,41 @@ const ProductDetails = ({ match }) => {
         <input
           className="quantityInput"
           readOnly
-          value={quanity}
+          value={quantity}
           onChange={(e) => setQuantity({ quanity: e.target.value })}
         />
         <Button variant="primary" onClick={QuantityAdd}>
           +
         </Button>
         <br />
-        <Button>Your Cart({cart.length})</Button>
+        <p>Total: </p>
+        <input
+          className="quantityInput"
+          readOnly
+          value={productTotal}
+          onChange={(e) => setProductTotal({ total: e.target.value })}
+        />
         <br />
-        <Button variant="primary" onClick={AddToCart}>
+        <Button
+          variant="primary"
+          onClick={() =>
+            sendToCart(
+              product._id,
+              product.productName,
+              product.productPrice,
+              product.productImageName,
+              quantity,
+              productTotal
+            )
+          }
+        >
           Add to Cart
         </Button>
         <br />
 
-        <Button variant="primary">Add to Wishlist</Button>
+        <Button variant="primary" onClick={() => addToWishlist()}>
+          Add to Wishlist
+        </Button>
       </div>
     </div>
   );

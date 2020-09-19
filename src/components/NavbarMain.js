@@ -10,9 +10,11 @@ import Index from "./Index";
 import ContactUs from "./ContactUs";
 import ProductsMain from "./ProductsMain";
 import { UserContext } from "../App";
+import Logout from "./Logout";
 
 function NavbarMain() {
   const user = useContext(UserContext);
+  const loginStatusMain = user.loginStatus;
 
   return (
     <div>
@@ -35,7 +37,7 @@ function NavbarMain() {
             </Nav.Link>
           </Nav>
           <Nav>
-            {!user.name ? (
+            {!loginStatusMain ? (
               <>
                 <ModalLogin />
                 <ModalRegister />
@@ -46,8 +48,12 @@ function NavbarMain() {
                   <Link to="/cart">Cart</Link>
                 </Nav.Link>
                 <Nav.Link>
-                  <Link to="/contact">Profile</Link>
+                  <Link to="/wishlist">Wishlist</Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link to="/profile">Profile</Link>
                 </Nav.Link>{" "}
+                <Logout />
               </>
             )}
           </Nav>

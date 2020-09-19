@@ -37,3 +37,9 @@
   width: 7%;
   text-align: center;
 }
+.cartColumns {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 25%;
+  padding-left: 2%;
+}

@@ -14,8 +14,6 @@ const FormLogin = ({ handleClose, setShow }) => {
 
   console.log({ user });
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const history = useHistory();
 
   const submitHandler = (e) => {
@@ -23,17 +21,11 @@ const FormLogin = ({ handleClose, setShow }) => {
       .post("http://localhost:8000/users/login", data)
       .then((response) => {
         if (response.data.token != null) {
-          setIsLoggedIn(true);
+          user.setLoginStatus({ value: true });
 
-          localStorage.setItem("userId", JSON.stringify(response.data.id));
-          localStorage.setItem(
-            "userEmail",
-            JSON.stringify(response.data.email)
-          );
-          localStorage.setItem(
-            "userFirstName",
-            JSON.stringify(response.data.firstName)
-          );
+          sessionStorage.setItem("loginStatus", true);
+
+          localStorage.setItem("userData", JSON.stringify(response.data));
 
           alert(response.data.message_success);
 
@@ -51,10 +43,6 @@ const FormLogin = ({ handleClose, setShow }) => {
     e.preventDefault();
     console.log(data);
   };
-
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
 
   return (
     <div>

@@ -10,16 +10,25 @@ import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
+import Wishlist from "./components/Wishlist";
+import { Profile } from "./components/Profile";
 
 export const UserContext = React.createContext();
 
 function App() {
   const [name, setName] = useState(null);
+  const loginStatusMain = sessionStorage.getItem("loginStatus");
+  const [loginStatus, setLoginStatus] = useState(loginStatusMain);
 
   return (
     <div className="App">
       <UserContext.Provider
-        value={{ name: name, setName: ({ value }) => setName(value) }}
+        value={{
+          name: name,
+          setName: ({ value }) => setName(value),
+          loginStatus: loginStatus,
+          setLoginStatus: ({ value }) => setLoginStatus(value),
+        }}
       >
         <NavbarMain />
 
@@ -29,6 +38,8 @@ function App() {
           <Route exact path="/contact" component={ContactUs} />
           <Route exact path="/" component={Index} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/wishlist" component={Wishlist} />
+          <Route exact path="/profile" component={Wishlist} />
           <Route exact path="/products/:id" component={ProductDetails} />
         </Switch>
       </UserContext.Provider>
