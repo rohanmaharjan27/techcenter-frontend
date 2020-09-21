@@ -21,9 +21,11 @@ function Logout() {
     user.setLoginStatus({ value: true });
 
     localStorage.clear();
+    sessionStorage.clear();
     setShow(false);
     alert("Logged Out Successfully!");
     history.push("/");
+    window.location.reload();
   };
 
   return (

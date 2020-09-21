@@ -6,12 +6,12 @@ import { UserContext } from "../App";
 
 const ProductDetails = ({ match }) => {
   const userDetails = JSON.parse(localStorage.getItem("userData"));
-  let userEmail = userDetails.email;
+  const userId = userDetails.id;
   const id = match.params.id;
 
   const [wishlistData, setWishlistData] = useState({
-    email: userEmail,
-    id: id,
+    user: userId,
+    product: id,
   });
   //Route ko /products/:id
 
@@ -60,7 +60,11 @@ const ProductDetails = ({ match }) => {
     axios
       .post("http://localhost:8000/wishlists/", wishlistData)
       .then((response) => {
-        alert(response.data.message_successs);
+        if (response.data.message_success) {
+          alert(response.data.message_success);
+        } else {
+          alert(response.data.message_error);
+        }
       })
       .catch((error) => {
         alert(error.message);
@@ -122,7 +126,7 @@ const ProductDetails = ({ match }) => {
         <br />
         <p>Quantity</p>
         <Button variant="primary" onClick={QuantitySubtract}>
-          -
+          {/* ()=>QuantitySubtract()  // ()=>functionName() one time call */}-
         </Button>
         <input
           className="quantityInput"
