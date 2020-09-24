@@ -52,8 +52,9 @@ const ProductDetails = ({ match }) => {
 
     localStorage.setItem("cartItems", JSON.stringify(finalCart));
 
-    alert("Product Added to Cart");
     alert("Product Already In Cart");
+
+    alert("Product Added to Cart");
   };
 
   const addToWishlist = () => {

@@ -52,6 +52,9 @@ function NavbarMain() {
                 </Nav.Link>
                 <Nav.Link>
                   <Link to="/profile">Profile</Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link to="/orders">Your Orders</Link>
                 </Nav.Link>{" "}
                 <Logout />
               </>

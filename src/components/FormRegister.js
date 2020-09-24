@@ -20,7 +20,7 @@ const FormRegister = ({ handleClose, setShow }) => {
     axios
       .post("http://localhost:8000/users/register", data)
       .then((response) => {
-        if (response.data.message_success === "Register Successful") {
+        if (response.data.message_success) {
           alert(response.data.message_success);
           setShow(false);
           history.push("/");

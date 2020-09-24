@@ -12,6 +12,7 @@ import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import Wishlist from "./components/Wishlist";
 import { Profile } from "./components/Profile";
+import OrderHistory from "./components/OrderHistory";
 
 export const UserContext = React.createContext();
 
@@ -39,7 +40,8 @@ function App() {
           <Route exact path="/" component={Index} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/wishlist" component={Wishlist} />
-          <Route exact path="/profile" component={Wishlist} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/orders" component={OrderHistory} />
           <Route exact path="/products/:id" component={ProductDetails} />
         </Switch>
       </UserContext.Provider>
