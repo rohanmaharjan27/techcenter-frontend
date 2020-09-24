@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CardProduct from "./CardProduct";
 import { CardColumns, Col, Form } from "react-bootstrap";
-import Cart from "./Cart";
 
 const ProductsMain = () => {
   const [products, setProducts] = useState([]);

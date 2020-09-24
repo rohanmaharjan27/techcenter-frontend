@@ -1,18 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { NavLink, useHistory } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Button, Modal, Nav } from "react-bootstrap";
 import { UserContext } from "../App";
 
 function Logout() {
   const user = useContext(UserContext);
-  const loginStatus = sessionStorage.getItem("loginStatus");
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const userDetails = JSON.parse(localStorage.getItem("userData"));
 
   const history = useHistory();
 
@@ -30,7 +26,11 @@ function Logout() {
 
   return (
     <div>
-      <Button onClick={handleShow}>Logout</Button>
+      <Nav.Link>
+        <Link onClick={handleShow} className="link">
+          Logout
+        </Link>
+      </Nav.Link>
       <Modal
         show={show}
         onHide={handleClose}

@@ -32,8 +32,6 @@ const Wishlist = () => {
         console.log(err);
       });
   };
-
-  const add = () => {};
   return (
     <div>
       <CardColumns className="cartColumns">
@@ -45,7 +43,10 @@ const Wishlist = () => {
               className="cardImage"
             />
             <Card.Body>
-              <Link to={`/products/${wishlist.product._id}`}>
+              <Link
+                to={`/products/${wishlist.product._id}`}
+                className="productLink"
+              >
                 <Card.Title className="center">
                   {wishlist.product.productName}
                 </Card.Title>
@@ -56,6 +57,7 @@ const Wishlist = () => {
               <Button
                 variant="primary"
                 onClick={() => RemoveFromWishlist(wishlist._id)}
+                className="removeButton"
               >
                 Remove from Wishlist
               </Button>

@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Route } from "react-router-dom";
-import { Button, Jumbotron } from "react-bootstrap";
-import { UserContext } from "../App";
+import { Button } from "react-bootstrap";
 
 const ProductDetails = ({ match }) => {
   const userDetails = JSON.parse(localStorage.getItem("userData"));
@@ -46,7 +44,7 @@ const ProductDetails = ({ match }) => {
       // currentCart=[{_id:"1"},{_id:"2"}, {_id: "1"}]
     );
 
-    const words = ["a", "b", "c"];
+    // const words = ["a", "b", "c"];
 
     // const filteredWords = words.filter(word => word === "a"); ==> ["a"]
 
@@ -117,7 +115,6 @@ const ProductDetails = ({ match }) => {
       />
       <div className="productDetails">
         <h1>Product Details</h1>
-        <p>Name - {product._id}</p>
         <p>Name - {product.productName}</p>
         <p>Price - ${product.productPrice}</p>
         <p>Category - {product.productCategory}</p>
@@ -139,14 +136,16 @@ const ProductDetails = ({ match }) => {
           +
         </Button>
         <br />
-        <p>Total: </p>
-        <input
-          className="quantityInput"
-          readOnly
-          value={productTotal}
-          onChange={(e) => setProductTotal({ total: e.target.value })}
-        />
         <br />
+        <p>
+          Total:{" "}
+          <input
+            className="productTotal"
+            readOnly
+            value={`$${productTotal}`}
+            onChange={(e) => setProductTotal({ total: e.target.value })}
+          />
+        </p>
         <Button
           variant="primary"
           onClick={() =>
@@ -163,7 +162,7 @@ const ProductDetails = ({ match }) => {
           Add to Cart
         </Button>
         <br />
-
+        <br />
         <Button variant="primary" onClick={() => addToWishlist()}>
           Add to Wishlist
         </Button>

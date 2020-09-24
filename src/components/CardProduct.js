@@ -15,7 +15,7 @@ const CardProduct = (product) => {
           className="cardImage"
         />
         <Card.Body>
-          <Link to={`/products/${data._id}`}>
+          <Link to={`/products/${data._id}`} className="productLink">
             <Card.Title className="center">{data.productName}</Card.Title>
           </Link>
           <Card.Text className="center">${data.productPrice}</Card.Text>

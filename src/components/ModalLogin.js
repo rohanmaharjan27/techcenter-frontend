@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal, Form, Col, NavLink } from "react-bootstrap";
+import { Modal, NavLink } from "react-bootstrap";
 import Formlogin from "./FormLogin";
 
 function ModalLogin() {

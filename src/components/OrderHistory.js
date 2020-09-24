@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card, CardColumns } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const OrderHistory = () => {
@@ -22,8 +22,57 @@ const OrderHistory = () => {
   }, [userId]);
   return (
     <div>
-      <CardColumns className="cartColumns">
-        {orders.map((order, index) => (
+      <Table bordered responsive="xl">
+        <thead>
+          <tr>
+            <th>Order Date</th>
+            <th>Order Details</th>
+            <th>Prodcuts Ordered</th>
+            <th>Sub Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order, index) => (
+            <tr>
+              <td>
+                {" "}
+                <p>Order Date: {order.date}</p>
+              </td>
+              <td>
+                <p>Payment Type: {order.paymentType}</p>
+                <p>Status: {order.status}</p>
+              </td>
+              <td>
+                {order.products.map((productMain) => {
+                  return (
+                    <td>
+                      <img
+                        variant="top"
+                        width="200px"
+                        height="200px"
+                        src={`http://localhost:8000/images/${productMain.product.productImageName}`}
+                        alt="productImage"
+                      />
+                      <Link
+                        to={`/products/${productMain.product._id}`}
+                        className="productLink"
+                      >
+                        <p>{productMain.product.productName}</p>
+                      </Link>
+                      <p>${productMain.product.productPrice}</p>
+                      <p>Quantity: {productMain.quantity.$numberDecimal}</p>
+                      <p>Total: ${productMain.totalCost.$numberDecimal}</p>
+                    </td>
+                  );
+                })}
+              </td>
+              <td>${order.subTotal}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
+      {/* {orders.map((order, index) => (
           <Card style={{ width: "50rem" }}>
             <Card.Title>
               <Card.Text>Ordered Date: {order.date}</Card.Text>
@@ -47,7 +96,7 @@ const OrderHistory = () => {
             ))}
           </Card>
         ))}
-      </CardColumns>
+      </CardColumns> */}
     </div>
   );
 };

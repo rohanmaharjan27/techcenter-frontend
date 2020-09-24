@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { Button, Card, CardColumns } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const [subTotal, setSubTotal] = useState(0);
+  let subTotal = 0;
 
   const userDetails = JSON.parse(localStorage.getItem("userData"));
   let userId = userDetails.id;
@@ -29,7 +29,8 @@ const Cart = () => {
   const calculateTotal = () => {
     let total = 0;
     currentCart.map((product) => (total += product.productTotal));
-    return total;
+    subTotal += total;
+    return subTotal;
   };
 
   const checkOut = () => {
@@ -75,7 +76,7 @@ const Cart = () => {
               className="cardImage"
             />
             <Card.Body>
-              <Link to={`/products/${product._id}`}>
+              <Link to={`/products/${product._id}`} className="productLink">
                 <Card.Title className="center">{product.name}</Card.Title>
               </Link>
               <Card.Text className="center">${product.price}</Card.Text>
@@ -83,11 +84,12 @@ const Cart = () => {
                 Quantity:{product.quantity}
               </Card.Text>
               <Card.Text className="center">
-                Total: {product.productTotal}
+                Total: ${product.productTotal}
               </Card.Text>
               <Button
                 variant="primary"
                 onClick={() => removeFromCart(product._id)}
+                className="removeButton"
               >
                 Remove from Cart
               </Button>
@@ -95,8 +97,8 @@ const Cart = () => {
           </Card>
         ))}
       </CardColumns>
-      <div>
-        SubTotal:{calculateTotal()}
+      <div className="checkOut">
+        <p>SubTotal:${calculateTotal()}</p>
         <Button
           variant="primary"
           disabled={currentCart.length === 0}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal, Form, Col, Nav } from "react-bootstrap";
+import { Modal, Nav } from "react-bootstrap";
 import FormRegister from "./FormRegister";
 
 function ModalRegister() {
